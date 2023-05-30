@@ -28,14 +28,13 @@ function getComputerChoice() {
   return choice;
 }
 
-const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
+const btns = document.querySelectorAll("button");
+btns.forEach((button) => {
   button.addEventListener("click", () => {
     const playerSelection = button.id;
     const computerSelection = getComputerChoice();
-    console.log(playerSelection); //remove once these logs appear on DOM
-    console.log(computerSelection); //remove once these logs appear on DOM
-    console.log(updateScoreMessage(playerSelection, computerSelection)); //remove once these logs appear on DOM
+    updateScoreMessage(playerSelection, computerSelection); //remove once these logs appear on DOM
+    updateScoreBoard(playerScore, computerScore);
   });
 });
 
@@ -44,19 +43,22 @@ buttons.forEach((button) => {
 function updateScoreMessage(playerSelection, computerSelection) {
   const result = playRound(playerSelection, computerSelection);
   if (result == "Tie") {
-    return "It's a Tie!";
+    scoreMessage.textContent = "It's a Tie!";
   } else if (result == "Player") {
-    return `You Win! ${playerSelection} beats ${computerSelection}`;
+    scoreMessage.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
   } else {
-    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    scoreMessage.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
   }
 }
 //EVERYTHING UP TO THIS POINT WORKS IN CURRENT STATE
 
 // when scorePlayer++ use dom to change text value up to 5
 //const playerScore = document.querySelector(".player-score");
-playerScore.textContent = `Player:${playerScore}`;
-computerScore.textContent = `Computer:${computerScore}`;
+function updateScoreBoard(playerScore, computerScore) {
+  scorePlayer.textContent = `Player:${playerScore}`;
+  scoreComputer.textContent = `Computer:${computerScore}`;
+}
+
 //const computerScore = document.querySelector(".computer-score");
 
 //const scoreMessage = document.getElementById("score-message");
