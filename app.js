@@ -1,5 +1,5 @@
 //GAME
-//need to make playerScore appear in DOM
+
 let playerScore = 0;
 let computerScore = 0;
 let roundWinner = "";
@@ -28,15 +28,20 @@ function getComputerChoice() {
   return choice;
 }
 
-const btns = document.querySelectorAll("button");
-btns.forEach((button) => {
+const playerChoiceBtns = document.querySelectorAll(".playerChoiceSelect");
+playerChoiceBtns.forEach((button) => {
   button.addEventListener("click", () => {
     const playerSelection = button.id;
     const computerSelection = getComputerChoice();
-    updateScoreMessage(playerSelection, computerSelection); //remove once these logs appear on DOM
+    updateScoreMessage(playerSelection, computerSelection);
     updateScoreBoard(playerScore, computerScore);
+    gameOver();
   });
 });
+
+function isGameOver() {
+  return playerScore === 5 || computerScore === 5;
+}
 
 //UI
 
@@ -50,34 +55,55 @@ function updateScoreMessage(playerSelection, computerSelection) {
     scoreMessage.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
   }
 }
-//EVERYTHING UP TO THIS POINT WORKS IN CURRENT STATE
 
-// when scorePlayer++ use dom to change text value up to 5
-//const playerScore = document.querySelector(".player-score");
 function updateScoreBoard(playerScore, computerScore) {
-  scorePlayer.textContent = `Player:${playerScore}`;
-  scoreComputer.textContent = `Computer:${computerScore}`;
+  scorePlayer.textContent = `Player: ${playerScore}`;
+  scoreComputer.textContent = `Computer: ${computerScore}`;
 }
 
-//const computerScore = document.querySelector(".computer-score");
+function gameOver() {
+  if (isGameOver()) {
+    openEndgameModal();
+    setFinalMessage();
+  }
+}
 
-//const scoreMessage = document.getElementById("score-message");
+function openEndgameModal() {
+  endgameModal.classList.add("active");
+  overlay.classList.add("active");
+}
 
-//SHOW OVERALL WINNER AFTER SCORE REACHES 5
+function closeEndgameModal() {
+  endgameModal.classList.remove("active");
+  overlay.classList.remove("active");
+}
+function setFinalMessage() {
+  return playerScore > computerScore
+    ? (endgameMsg.textContent = "You Win!")
+    : (endgameMsg.textContent = "You Lose...Better Luck Next Time!");
+}
 
-//  console.log("Game Over");
-//  if (scorePlayer > scoreComputer) {
-//    console.log("Player has claimed victory!!");
-//  } else if (scoreComputer > scorePlayer) {
-//    console.log("Computer has claimed victory!!");
-//  } else {
-//    console.log("We have a tie... that's not very exciting");
-//  }
-//}
+function restartGame() {
+  playerScore = 0;
+  computerScore = 0;
+  scoreMessage.textContent = "First to score 5 points wins!";
+  //playerScorePara.textContent = "Player: 0"; !!FIX TO SHOW SCORE REST B4 NEXT PLAYER SELECTION
+  //computerScorePara.textContent = "Computer: 0"; !!FIX TO SHOW SCORE REST B4 NEXT PLAYER SELECTION
+  endgameModal.classList.remove("active");
+  overlay.classList.remove("active");
+}
 
 const playerScorePara = document.getElementById("playerScore");
 const computerScorePara = document.getElementById("computerScore");
 const rockbtn = document.querySelector("#rock");
 const paperbtn = document.querySelector("#paper");
 const scissorsbtn = document.querySelector("#scissors");
+
 const scoreMessage = document.getElementById("scoreMessage");
+const endgameModal = document.getElementById("endgameModal");
+const endgameMsg = document.getElementById("endgameMsg");
+const overlay = document.getElementById("overlay");
+const restartBtn = document.getElementById("restartBtn");
+
+restartBtn.addEventListener("click", restartGame);
+overlay.addEventListener("click", closeEndgameModal);

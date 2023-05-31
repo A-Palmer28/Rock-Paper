@@ -4,23 +4,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee+Spice&display=swap"
+      rel="stylesheet"
+    />
     <script src="/app.js" defer></script>
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <div class="container-game">
-      <div class="scoreboard">
-        <h3 class="score" id="scorePlayer">Player:</h3>
-        <h3 class="score" id="scoreComputer">Computer:</h3>
+    <header class="header">
+      <h1 class="title">ROCK PAPER SCISSORS</h1>
+    </header>
+    <div class="containerGame">
+      <div class="scoreBoard">
+        <h3 class="score" id="scorePlayer">Player: 0</h3>
+        <h3 class="score" id="scoreComputer">Computer: 0</h3>
       </div>
-      <div class="container-btn">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+      <div class="containerBtn">
+        <button class="playerChoiceSelect" id="rock">Rock</button>
+        <button class="playerChoiceSelect" id="paper">Paper</button>
+        <button class="playerChoiceSelect" id="scissors">Scissors</button>
       </div>
       <div>
-        <h4 class="scoreMessage" id="scoreMessage">First to 5 points wins!</h4>
+        <h4 class="scoreMessage" id="scoreMessage">
+          First to score 5 points wins!
+        </h4>
       </div>
     </div>
+    <div class="modal" id="endgameModal">
+      <p class="modal-title" id="endgameMsg"></p>
+      <button class="btn btn-restart" id="restartBtn">Play again</button>
+    </div>
+    <div class="overlay" id="overlay"></div>
   </body>
 </html>
