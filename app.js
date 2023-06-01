@@ -80,21 +80,21 @@ function closeEndgameModal() {
 function setFinalMessage() {
   return playerScore > computerScore
     ? (endgameMsg.textContent = "You Win!")
-    : (endgameMsg.textContent = "You Lose...Better Luck Next Time!");
+    : (endgameMsg.textContent = "You Lose! Better Luck Next Time!");
 }
 
 function restartGame() {
   playerScore = 0;
   computerScore = 0;
   scoreMessage.textContent = "First to score 5 points wins!";
-  //playerScorePara.textContent = "Player: 0"; !!FIX TO SHOW SCORE REST B4 NEXT PLAYER SELECTION
-  //computerScorePara.textContent = "Computer: 0"; !!FIX TO SHOW SCORE REST B4 NEXT PLAYER SELECTION
+  playerScorePara.textContent = "Player: 0";
+  computerScorePara.textContent = "Computer: 0";
   endgameModal.classList.remove("active");
   overlay.classList.remove("active");
 }
 
-const playerScorePara = document.getElementById("playerScore");
-const computerScorePara = document.getElementById("computerScore");
+const playerScorePara = document.getElementById("scorePlayer");
+const computerScorePara = document.getElementById("scoreComputer");
 const rockbtn = document.querySelector("#rock");
 const paperbtn = document.querySelector("#paper");
 const scissorsbtn = document.querySelector("#scissors");
